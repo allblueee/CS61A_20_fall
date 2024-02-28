@@ -109,7 +109,20 @@ def missing_digits(n):
     >>> check(HW_SOURCE_FILE, 'missing_digits', ['While', 'For'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    if(n<10):
+        return 0
+    def recHelper(n, prev, res):
+        if(n<10):
+            if(n==prev):
+                return res
+            return res + prev - n%10 -1;
+        if(n%10>=prev):
+            return recHelper(n//10, prev, res)
+        if(n%10==prev-1):
+            return recHelper(n//10,prev-1, res)
+        if(n%10<prev-1):
+            return recHelper(n//10, n%10,res+prev-n%10-1)
+    return recHelper(n//10, n%10, 0)
 
 
 def next_largest_coin(coin):
