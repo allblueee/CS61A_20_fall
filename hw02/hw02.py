@@ -158,7 +158,20 @@ def count_coins(total):
     >>> check(HW_SOURCE_FILE, 'count_coins', ['While', 'For'])                                          
     True
     """
-    "*** YOUR CODE HERE ***"
+    def recHelper(total, smallest_coin):
+        if(total == 0):
+            return 1
+        elif(total < 0):
+            return 0
+        elif not smallest_coin:
+            return 0
+        else:
+            next_coin = next_largest_coin(smallest_coin)
+            with_smallest_coin = recHelper(total-smallest_coin, smallest_coin)
+            without_smallest_coin = recHelper(total, next_coin);
+            return without_smallest_coin + with_smallest_coin
+
+    return recHelper(total, 1)
 
 
 from operator import sub, mul
