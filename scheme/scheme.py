@@ -163,6 +163,15 @@ class BuiltinProcedure(Procedure):
         python_args = []
         # BEGIN PROBLEM 3
         "*** YOUR CODE HERE ***"
+        def appendToArgs(args):
+            if(args is not nil):
+                python_args.append(args.first)
+                appendToArgs(args.rest)
+        
+        appendToArgs(args)
+        
+        if self.use_env == True:
+            python_args.append(env)
         # END PROBLEM 3
         try:
             return self.fn(*python_args)
