@@ -364,7 +364,18 @@ def do_and_form(expressions, env):
     """
     # BEGIN PROBLEM 12
     "*** YOUR CODE HERE ***"
+    if expressions is nil:
+        return True
+    value = scheme_eval(expressions.first, env)
+    if is_true_primitive(value):
+        if expressions.rest is nil:
+            return value
+        else:
+            return do_and_form(expressions.rest, env)
+    else:
+        return False
     # END PROBLEM 12
+
 
 def do_or_form(expressions, env):
     """Evaluate a (short-circuited) or form.
@@ -381,6 +392,14 @@ def do_or_form(expressions, env):
     """
     # BEGIN PROBLEM 12
     "*** YOUR CODE HERE ***"
+    if expressions is nil:
+        return False
+    value = scheme_eval(expressions.first, env)
+    if is_false_primitive(value):
+        return do_or_form(expressions.rest, env)
+    else:
+        return value
+
     # END PROBLEM 12
 
 def do_cond_form(expressions, env):
